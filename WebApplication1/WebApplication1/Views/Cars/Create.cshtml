@@ -1,0 +1,140 @@
+﻿@model WebApplication1.ViewModels.CarInputViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Ajax.BeginForm("Create", "Cars", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "OnSuccess" }, new { id = "carForm" }))
+{
+
+
+    <div class="form-horizontal">
+      
+        <hr />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CarName,  new { @class = "control-label col-md-2" })
+            <div class="col-4">
+                @Html.TextBoxFor(model => model.CarName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CarName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price,  new { @class = "control-label col-md-2" })
+            <div class="col-4">
+                @Html.TextBoxFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsStock,  new { @class = "control-label col-md-2" })
+            <div class="col-4">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(model => model.IsStock)
+                    @Html.ValidationMessageFor(model => model.IsStock, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Picture, new { @class = "control-label col-md-2" })
+            <div class="col-4">
+                <input type="file" id="pic" name="name" value="" />
+                @Html.HiddenFor(model => model.Picture, new { htmlAttributes = new { @class = "form-control" } })
+
+            </div>
+        </div>
+        <div class="w-100">
+            <div class="btn btn-success justify-content-sm-end">
+                <button type="button" id="add">Add</button>
+            </div>
+        </div>
+        <div id="CarInforamation">
+            @Html.Action("CarInputController")
+        </div>
+    
+        <div class="form-group">
+            <div class="col-md-offset-2 col-4">
+                <button type="submit" class="btn btn-success">Save</button>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section scripts{
+    <script src="~/Scripts/jquery-3.6.3.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script type="text/javascript">
+        $.validator.setDefaults({
+            ignore:""
+        });
+        $("#add").click(() => {
+            $.ajax({
+                type: "POST",
+                url: "/Cars/CarInputController/",
+                cache: false,
+                data: $("#carForm").serialize(),
+                success: r => {
+                    $("#CarInforamation").html(r);
+                }
+            })
+            $("#pic").change(() => {
+                if (document.getElementById("pic").files.length) {
+                    $("#Picture").val(document.getElementById("pic").files[0].name);
+                }
+
+            });
+            $(document).on("click", "button.del", function () {
+                var i = $(this).data("index");
+                $.ajax({
+                    type: "POST",
+                    url: "/Cars/CarInputController?index=" + i,
+                    cache: false,
+                    data: $("#frm").serialize(),
+                    success: r => {
+                        $("#CarInforamation").html(r);
+                       
+
+                    }
+                });
+            })
+            function onSuccess(r) {
+                if (r) {
+                    console.log(r);
+                    var formData = new FormData();
+                    if (document.getElementById("pic").files.length > 0) {
+                        formData.append("Picture", document.getElementById("pic").files[0]);
+                        //console.log(formData);
+                        $.ajax({
+                            type: "POST",
+                            url: "/Cars/UploadImageViewModel/" + r.id,
+                            data: formData,
+                            contentType: false, 
+                            processData: false,
+                            success: ss => {
+                                console.log(ss);
+                                alert("Data saved");
+                            },
+                            error: err1 => {
+                                console.log(err1);
+                            }
+                        });
+                    }
+                }
+            }
+        })
+    </script>
+
+
+}

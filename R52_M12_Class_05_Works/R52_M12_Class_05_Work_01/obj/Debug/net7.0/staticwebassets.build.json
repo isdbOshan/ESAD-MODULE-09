@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "Hash": "FNPcBVI/BEV+HSxEXjM/+lUtAvth8I7PP/BvBXm0yzQ=",
+  "Source": "R52_M12_Class_05_Work_01",
+  "BasePath": "_content/R52_M12_Class_05_Work_01",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "R52_M12_Class_05_Work_01\\wwwroot",
+      "Source": "R52_M12_Class_05_Work_01",
+      "ContentRoot": "D:\\Sohan\\ESAD\\Module_9_Final_Evidence\\Class 05\\R52_M12_Class_05_Works\\R52_M12_Class_05_Work_01\\wwwroot\\",
+      "BasePath": "_content/R52_M12_Class_05_Work_01",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\Sohan\\ESAD\\Module_9_Final_Evidence\\Class 05\\R52_M12_Class_05_Works\\R52_M12_Class_05_Work_01\\wwwroot\\Images\\xv1z2bta.jpg",
+      "SourceId": "R52_M12_Class_05_Work_01",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Sohan\\ESAD\\Module_9_Final_Evidence\\Class 05\\R52_M12_Class_05_Works\\R52_M12_Class_05_Work_01\\wwwroot\\",
+      "BasePath": "_content/R52_M12_Class_05_Work_01",
+      "RelativePath": "Images/xv1z2bta.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\xv1z2bta.jpg"
+    }
+  ]
+}

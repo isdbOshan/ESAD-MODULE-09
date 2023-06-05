@@ -1,0 +1,47 @@
+﻿@model R52_Ex_07_Evidence.ViewModels.Identity.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h3>Register</h3>
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(false)
+            <div class="form-group row mb-1">
+                @Html.LabelFor(x => x.Username, new { @class = "col-form-label col-2 text-end" })
+                <div class="col-4">
+                    @Html.TextBoxFor(x => x.Username, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.Username, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                @Html.LabelFor(x => x.Password, new { @class = "col-form-label col-2 text-end" })
+                <div class="col-4">
+                    @Html.PasswordFor(x => x.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                @Html.LabelFor(x => x.ConfirmPassword, new { @class = "col-form-label col-2 text-end" })
+                <div class="col-4">
+                    @Html.TextBoxFor(x => x.ConfirmPassword, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+
+                <div class="col-4 offset-2">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section scripts {
+    <script src="~/Scripts/jquery-3.6.3.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+}
+

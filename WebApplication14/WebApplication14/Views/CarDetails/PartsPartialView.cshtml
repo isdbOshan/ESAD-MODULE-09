@@ -1,0 +1,45 @@
+﻿@model IEnumerable<WebApplication14.Models.PartDetails>
+
+@{
+    ViewBag.Title = "_PartialPartDetails";
+}
+
+<hr />
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CarDetail.CarName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PartName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PartType)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CarDetail.CarName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PartName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PartType)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PartId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PartId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PartId })
+        </td>
+    </tr>
+}
+
+</table>

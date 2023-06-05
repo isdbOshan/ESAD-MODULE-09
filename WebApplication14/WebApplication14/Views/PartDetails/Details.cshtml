@@ -1,0 +1,42 @@
+﻿@model WebApplication14.Models.PartDetails
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PartDetails</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CarDetail.CarName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarDetail.CarName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PartName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PartName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PartType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PartType)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PartId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

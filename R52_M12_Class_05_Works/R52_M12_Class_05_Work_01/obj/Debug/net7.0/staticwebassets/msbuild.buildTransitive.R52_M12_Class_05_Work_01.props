@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\R52_M12_Class_05_Work_01.props" />
+</Project>

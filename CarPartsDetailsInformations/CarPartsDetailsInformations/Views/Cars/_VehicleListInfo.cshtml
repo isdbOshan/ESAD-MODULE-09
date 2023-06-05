@@ -1,0 +1,121 @@
+﻿@model  CarPartsDetailsInformations.ViewModel.InputViewModel
+@for (var i = 0; i < Model.Vehicles.Count; i++)
+{
+    <div class="col-2">
+        <label>Vehicle Name</label>
+        @Html.TextBoxFor(x => Model.Vehicles[i].VehicleName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => Model.Vehicles[i].VehicleName, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-2">
+        <label>Price</label>
+        @Html.TextBoxFor(x => Model.Vehicles[i].Price, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => Model.Vehicles[i].Price, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-2">
+        <label>Launch</label>
+        @Html.TextBoxFor(x => Model.Vehicles[i].MakeYear, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => Model.Vehicles[i].MakeYear, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group row mb-1">
+        <label>Picture</label>
+        <div class="col-2">
+            <input type="file" id="pic" class="form-control" />
+            @Html.HiddenFor(c => Model.Vehicles[i].Picture, new { value = "" })
+            @Html.ValidationMessageFor(c => Model.Vehicles[i].Picture, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-1">
+        <label>Stock</label>
+        @Html.CheckBoxFor(x => Model.Vehicles[i].IsStock, new { @class = "" })
+
+    </div>
+    <div class="col-1">
+
+        <button class="btn btn-warning btn-sm mt-4 del" data-index="@i" type="button">Remove</button>
+    </div>
+}
+
+@*@section styles
+{
+    <link href="~/Content/bootstrap-datepicker.standalone.css" rel="stylesheet" />
+}
+@section scripts
+{
+    <script src="~/Scripts/jquery-3.6.3.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script type="text/javascript">
+        $.validator.setDefaults({
+            ignore: ""
+        });
+        $(".date").datepicker({
+            format: "yyyy-mm-dd"
+        });
+        $("#add").click(() => {
+            $.ajax({
+                type: "POST",
+                url: "/Candidates/AddQuationToForm",
+                cache: false,
+                data: $("#frm").serialize(),
+                success: r => {
+                    $("#qualifications").html(r);
+                    $("form").removeData("validator");
+                    $("form").removeData("unobtrusiveValidation");
+                    $.validator.unobtrusive.parse("form");
+
+                }
+            });
+        });
+        $("#pic").change(() => {
+            if (document.getElementById("pic").files.length) {
+                $("#Picture").val(document.getElementById("pic").files[0].name);
+            }
+
+        });
+        $(document).on("click", "button.del", function () {
+            var i = $(this).data("index");
+            $.ajax({
+                type: "POST",
+                url: "/Candidates/AddQuationToForm?index="+i,
+                cache: false,
+                data: $("#frm").serialize(),
+                success: r => {
+                    $("#qualifications").html(r);
+                    $("form").removeData("validator");
+                    $("form").removeData("unobtrusiveValidation");
+                    $.validator.unobtrusive.parse("form");
+
+                }
+            });
+        })
+        function onSuccess(r) {
+            if (r) {
+                console.log(r);
+                var formData = new FormData();
+                if (document.getElementById("pic").files.length > 0) {
+                    formData.append("Picture", document.getElementById("pic").files[0]);
+                    //console.log(formData);
+                    $.ajax({
+                        type: "POST",
+                        url: "/Candidates/UploadImage/"+r.id,
+                        data: formData,
+                        contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+                        processData: false,
+                        success: ss => {
+                            console.log(ss);
+                            alert("Data saved");
+                        },
+                        error: err1 => {
+                            console.log(err1);
+                        }
+                    });
+                }
+            }
+        }
+        function onFail(err) {
+
+        }
+    </script>
+}*@

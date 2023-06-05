@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Sohan\\ESAD\\Module_9_Final_Evidence\\Class 05\\R52_M12_Class_05_Works\\R52_M12_Class_05_Work_01\\wwwroot\\Images\\xv1z2bta.jpg",
+      "PackagePath": "staticwebassets\\Images\\xv1z2bta.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.R52_M12_Class_05_Work_01.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.R52_M12_Class_05_Work_01.props",
+      "PackagePath": "build\\R52_M12_Class_05_Work_01.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.R52_M12_Class_05_Work_01.props",
+      "PackagePath": "buildMultiTargeting\\R52_M12_Class_05_Work_01.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.R52_M12_Class_05_Work_01.props",
+      "PackagePath": "buildTransitive\\R52_M12_Class_05_Work_01.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

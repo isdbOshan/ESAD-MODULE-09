@@ -1,0 +1,20 @@
+﻿@model WebApplication1.ViewModels.CarInputViewModel
+@for (var i = 0; i < Model.PartDetail.Count; i++)
+{
+
+    <div>
+        <label>Engine Type</label>
+        @Html.TextAreaFor(x => x.PartDetail[i].EngineType, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.PartDetail[i].EngineType, "", new { @class = "text-danger" })
+    </div>
+    <div>
+        <label>Door </label>
+        @Html.TextAreaFor(x => x.PartDetail[i].Door, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.PartDetail[i].Door, "", new { @class = "text-danger" })
+    </div>
+
+    <div>
+        <button type="button" class="btn btn-sm delete" data-index="@i">Remove</button>
+    </div>
+
+}

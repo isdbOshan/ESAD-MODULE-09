@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datepicker.standalone.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.bundle.js"></script>
+    @RenderSection("styles", false)
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-light bg-body-tertiary">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <a class="navbar-brand" href="#">Car Information</a>
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { }, new { @class = "nav-link" })</li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li class="nav-item">@Html.ActionLink("Logout", "Logout", "Authentications", new { }, new { @class = "nav-link" })</li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">@Html.ActionLink("Register", "Register", "Authentications", new { }, new { @class = "nav-link" })</li>
+                        <li class="nav-item">@Html.ActionLink("Login", "Login", "Authentications", new { }, new { @class = "nav-link" })</li>
+                    }
+                </ul>
+             
+            </div>
+        </div>
+    </nav>
+
+    
+
+    <div class="container-fluid body-content" style="min-height:calc(100vh - 110px)">
+        @RenderBody()
+    </div>
+    <footer class="container-fluid">
+        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>
+
+
+    @RenderSection("scripts", false)
+</body>
+</html>

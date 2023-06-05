@@ -1,0 +1,35 @@
+﻿@model IEnumerable<WebApplication1.Models.CarDetail>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-12">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Car Name</th>
+                    <th>Price</th>
+                    <th>Picture</th>
+                    <th>Stock</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var car in Model)
+            {
+                <tr>
+                    <td>@car.CarName</td>
+                    <td>@car.Price</td>
+                    <td>@car.Picture</td>
+                    <td>@car.IsStock</td>
+                    <td>
+
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+

@@ -1,0 +1,41 @@
+﻿@model R52_Ex_07_Evidence.ViewModels.Identity.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h3>Login</h3>
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary()
+            <div class="form-group row mb-1">
+                @Html.LabelFor(x => x.Username, new { @class = "col-form-label col-2 text-end" })
+                <div class="col-4">
+                    @Html.TextBoxFor(x => x.Username, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.Username, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                @Html.LabelFor(x => x.Password, new { @class = "col-form-label col-2 text-end" })
+                <div class="col-4">
+                    @Html.PasswordFor(x => x.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+
+                <div class="col-4 offset-2">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+
+                <div class="col-12">
+                   @Html.ActionLink("Register here", "Register", "Account")
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

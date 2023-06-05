@@ -1,0 +1,63 @@
+﻿@model ProductViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h3>Wearable Product</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Size</th>
+                    <th>Color</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in Model.Wearables)
+                {
+                         <tr>
+                        <td>@p.ProductName</td>
+                        <td>@p.UnitPrice</td>
+                        <td>@p.Size</td>
+                        <td>@p.Color</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-12">
+        <h3>Edibles Product</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Size</th>
+                    <th>Color</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in Model.Edibles)
+                {
+                    <tr>
+                        <td>@p.ProductName</td>
+                        <td>@p.UnitPrice</td>
+                        <td>@p.Quantity</td>
+                        <td>@p.Form</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+

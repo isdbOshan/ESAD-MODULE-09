@@ -1,0 +1,158 @@
+﻿@model R52_Ex_07_Evidence.ViewModels.CandidateInputModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h2>Create new Candidate</h2>
+        <div id="msg"></div>
+        @using (Ajax.BeginForm("Create", "Candidates", new { }, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "msg", OnSuccess="onSuccess", OnFailure="onFail" }, new { id = "frm" }))
+        {
+            <div class="form-group row mb-1">
+                @Html.LabelFor(c => c.CandidateName, new { @class = "col-form-label col-2" })
+                <div class="col-4">
+                    @Html.TextBoxFor(c => c.CandidateName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(c => c.CandidateName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                @Html.LabelFor(c => c.BirthDate, new { @class = "col-form-label col-2" })
+                <div class="col-4">
+                    @Html.TextBoxFor(c => c.BirthDate, new { @class = "form-control date" })
+                    @Html.ValidationMessageFor(c => c.BirthDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                @Html.LabelFor(c => c.AppliedFor, new { @class = "col-form-label col-2" })
+                <div class="col-4">
+                    @Html.DropDownListFor(c => c.AppliedFor, ViewBag.PostList as IEnumerable<SelectListItem>, new { @class = "form-select" })
+                    @Html.ValidationMessageFor(c => c.AppliedFor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                @Html.LabelFor(c => c.ExpectedSalary, new { @class = "col-form-label col-2" })
+                <div class="col-4">
+                    @Html.TextBoxFor(c => c.ExpectedSalary, new { @class = "form-control", @type = "number" })
+                    @Html.ValidationMessageFor(c => c.ExpectedSalary, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                @Html.LabelFor(c => c.Picture, new { @class = "col-form-label col-2" })
+                <div class="col-4">
+                    <input type="file" id="pic" class="form-control" />
+                    @Html.HiddenFor(c => c.Picture, new { value = "" })
+                    @Html.ValidationMessageFor(c => c.Picture, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                @Html.LabelFor(c => c.WorkFromHome, new { @class = "col-form-label col-2" })
+                <div class="col-4">
+                    @Html.CheckBoxFor(c => c.WorkFromHome, new { @class = "mt-2" })
+
+                </div>
+            </div>
+            <div class="w-100 mb-1">
+                <div class="d-flex justify-content-end me-2">
+                    <button type="button" id="add" class="btn btn-secondary btn-sm">Add</button>
+                </div>
+            </div>
+            <div id="qualifications" class="row mb-1">
+                @Html.Action("AddQuationToForm")
+            </div>
+            <div class="w-100">
+                <div class="d-flex justify-content-end me-2">
+                    <button type="submit" class="btn btn-primary">Save to database</button>
+                </div>
+            </div>
+        }
+
+    </div>
+    <div class="col-12">
+        @Html.ActionLink("Back to list", "Index")
+    </div>
+</div>
+@section styles
+{
+    <link href="~/Content/bootstrap-datepicker.standalone.css" rel="stylesheet" />
+}
+@section scripts
+{
+    <script src="~/Scripts/jquery-3.6.3.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script type="text/javascript">
+        $.validator.setDefaults({
+            ignore: ""
+        });
+        $(".date").datepicker({
+            format: "yyyy-mm-dd"
+        });
+        $("#add").click(() => {
+            $.ajax({
+                type: "POST",
+                url: "/Candidates/AddQuationToForm",
+                cache: false,
+                data: $("#frm").serialize(),
+                success: r => {
+                    $("#qualifications").html(r);
+                    $("form").removeData("validator");
+                    $("form").removeData("unobtrusiveValidation");
+                    $.validator.unobtrusive.parse("form");
+
+                }
+            });
+        });
+        $("#pic").change(() => {
+            if (document.getElementById("pic").files.length) {
+                $("#Picture").val(document.getElementById("pic").files[0].name);
+            }
+
+        });
+        $(document).on("click", "button.del", function () {
+            var i = $(this).data("index");
+            $.ajax({
+                type: "POST",
+                url: "/Candidates/AddQuationToForm?index="+i,
+                cache: false,
+                data: $("#frm").serialize(),
+                success: r => {
+                    $("#qualifications").html(r);
+                    $("form").removeData("validator");
+                    $("form").removeData("unobtrusiveValidation");
+                    $.validator.unobtrusive.parse("form");
+
+                }
+            });
+        })
+        function onSuccess(r) {
+            if (r) {
+                console.log(r);
+                var formData = new FormData();
+                if (document.getElementById("pic").files.length > 0) {
+                    formData.append("Picture", document.getElementById("pic").files[0]);
+                    //console.log(formData);
+                    $.ajax({
+                        type: "POST",
+                        url: "/Candidates/UploadImage/"+r.id,
+                        data: formData,
+                        contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+                        processData: false,
+                        success: ss => {
+                            console.log(ss);
+                            alert("Data saved");
+                        },
+                        error: err1 => {
+                            console.log(err1);
+                        }
+                    });
+                }
+            }
+        }
+        function onFail(err) {
+
+        }
+    </script>
+}

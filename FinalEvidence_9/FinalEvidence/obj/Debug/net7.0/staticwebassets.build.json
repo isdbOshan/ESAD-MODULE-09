@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "bwjipSIMTCDU8nHbTljafkROePLJnfqti0RGBc828Rc=",
+  "Source": "FinalEvidence",
+  "BasePath": "_content/FinalEvidence",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "FinalEvidence\\wwwroot",
+      "Source": "FinalEvidence",
+      "ContentRoot": "D:\\Sohan\\ESAD\\Module_9_Final_Evidence\\CarDetails\\FinalEvidence\\FinalEvidence\\wwwroot\\",
+      "BasePath": "_content/FinalEvidence",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}
